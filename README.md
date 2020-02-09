@@ -23,7 +23,7 @@ Installation over Ubuntu 18.04:
 - ROS Melodic: Desktop-Full Install recommended, includes Gazebo 9.0.0 (http://wiki.ros.org/melodic/Installation/Ubuntu).
 - Gazebo 9.0.0
 
-#### ROS Melodic related dependencies
+### ROS Melodic related dependencies
 ```
 sudo apt-get install                     \
 python-pip python3-vcstool python3-pyqt4 \
@@ -52,6 +52,38 @@ ros-melodic-pcl-ros                      \
 ros-melodic-navigation                   \
 ros-melodic-sophus
 ```
+
+### Create a virtualenv
+
+```bash
+virtualenv -p python3 gym-gazebo-env
+```
+Activate the virtual environment:
+```bash
+source gym-gazebo-env/bin/activate
+```
+
+### Install Python Packages:
+
+```bash
+pip install -r requirements
+```
+
+#### Install gym-gazebo
+```bash
+cd ~
+git clone https://github.com/erlerobot/gym-gazebo
+cd gym-gazebo
+pip install -e .
+```
+
+#### Run bash files, build the ROS workspace:
+```bash
+cd gym-gazebo/gym_gazebo/envs/installation
+bash setup_melodic.bash
+```
+
+
 
 ## Usage
 
@@ -95,10 +127,9 @@ os.environ["ROS_MASTER_URI"] = "http://localhost:"+self.port
 os.environ["GAZEBO_MASTER_URI"] = "http://localhost:"+self.port_gazebo
 ```
 
-Finally, launch gzclient.
+Finally, launch `gzclient`.
 ```bash
 gzclient
-
 ```
 
 ### Display reward plot
@@ -121,8 +152,6 @@ We recommend creating an alias to kill those processes.
 ```bash
 echo "alias killgazebogym='killall -9 rosout roslaunch rosmaster gzserver nodelet robot_state_publisher gzclient'" >> ~/.bashrc
 ```
-
-
 
 
 ## Community-maintained environments
@@ -150,3 +179,16 @@ community support**.
 | ![GazeboModularScara3DOF-v1.png](imgs/GazeboModularScara3DOF-v1.png)`GazeboModularScara3DOF-v1` | ROS | **Deprecated** | | | TBD |
 | ![GazeboModularScara3DOF-v0.png](imgs/GazeboModularScara3DOF-v0.png)`GazeboModularScara3DOF-v0` | ROS | **Deprecated** | | | | TBD |
 | ![ariac_pick.jpg](imgs/ariac_pick.jpg)`ARIACPick-v0` | ROS | | | |  |
+
+
+
+## FAQ
+
+Other possible libraries. Maybe these packages are necessary.
+
+```bash
+sudo apt install libosmesa6-dev
+sudo apt install meshlab
+sudo apt install libsdl1.2-dev
+sudo apt-get install python3-empy
+```
